@@ -1,0 +1,51 @@
+/* B2B Company Account Block */
+.b2b-company-account { max-width: 1200px; margin: 0 auto; padding: 1rem; font-family: var(--type-base-font-family, 'Segoe UI', sans-serif); }
+.b2b-tabs { display: flex; gap: .5rem; border-bottom: 2px solid #1a237e; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { padding: .6rem 1.2rem; border: none; background: #e8eaf6; color: #1a237e; cursor: pointer; font-size: .9rem; border-radius: 4px 4px 0 0; font-weight: 600; }
+.tab-btn.active { background: #1a237e; color: #fff; }
+.tab-content.hidden { display: none; }
+.company-info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.info-card { background: #f5f5f5; border-radius: 6px; padding: 1rem; border-left: 4px solid #1a237e; }
+.info-label { display: block; font-size: .8rem; color: #666; text-transform: uppercase; letter-spacing: .05em; }
+.info-value { font-size: 1.1rem; font-weight: 600; color: #212121; }
+.status-badge { display: inline-block; padding: .15rem .6rem; border-radius: 3px; font-size: .85rem; font-weight: 600; }
+.status-aktiv { background: #c8e6c9; color: #2e7d32; }
+.b2b-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.b2b-table th, .b2b-table td { padding: .6rem .75rem; border: 1px solid #ddd; text-align: left; }
+.b2b-table th { background: #1a237e; color: #fff; font-weight: 600; }
+.b2b-table tr:nth-child(even) { background: #f5f5f5; }
+.role-badge { padding: .15rem .5rem; border-radius: 3px; font-size: .8rem; font-weight: 600; }
+.role-admin { background: #e3f2fd; color: #1565c0; }
+.role-buyer { background: #fff3e0; color: #ef6c00; }
+.role-approver { background: #f3e5f5; color: #7b1fa2; }
+.role-viewer { background: #e8eaf6; color: #3949ab; }
+.org-tree { background: #f9f9f9; padding: 1.5rem; border-radius: 6px; }
+.org-node { padding: .5rem; border-left: 3px solid #1a237e; margin-bottom: .5rem; }
+.org-unit-name { font-weight: 700; color: #1a237e; }
+.org-unit-users { font-size: .9rem; color: #555; }
+.org-user em { color: #888; }
+.addresses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+.address-card { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 1rem; }
+.address-card h4 { color: #1a237e; margin-bottom: .5rem; }
+.badge-default { background: #c8e6c9; color: #2e7d32; padding: .1rem .4rem; border-radius: 3px; font-size: .75rem; margin-left: .5rem; }
+.address-type { font-size: .85rem; color: #666; margin-top: .5rem; }
+.credit-bar { height: 30px; background: #e0e0e0; border-radius: 15px; overflow: hidden; margin: 1rem 0; }
+.credit-used { height: 100%; background: linear-gradient(90deg, #1a237e, #3949ab); border-radius: 15px; transition: width .5s; }
+.credit-details p { margin: .4rem 0; font-size: 1rem; }
+/* Forms */
+.form-group { margin-bottom: 1rem; flex: 1; }
+.form-group label { display: block; font-weight: 600; margin-bottom: .3rem; color: #333; font-size: .9rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: 4px; font-size: .9rem; }
+.form-group input:focus, .form-group select:focus { border-color: #1a237e; outline: none; box-shadow: 0 0 0 2px rgba(26,35,126,.2); }
+.form-row { display: flex; gap: 1rem; }
+.form-actions { margin-top: 1rem; display: flex; gap: .5rem; }
+.btn-primary { padding: .6rem 1.5rem; background: #1a237e; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+.btn-primary:hover { background: #283593; }
+.btn-secondary { padding: .6rem 1.5rem; background: #e0e0e0; color: #333; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+.btn-sm { padding: .3rem .7rem; font-size: .8rem; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; }
+.vies-status { font-size: .85rem; margin-top: .3rem; display: block; }
+.vies-status.valid { color: #2e7d32; }
+.vies-status.invalid { color: #c62828; }
+.msg-error { background: #ffebee; color: #c62828; padding: .75rem; border-radius: 4px; margin-top: 1rem; }
+.msg-success { background: #e8f5e9; color: #2e7d32; padding: .75rem; border-radius: 4px; margin-top: 1rem; }
+@media (max-width: 768px) { .form-row { flex-direction: column; } .company-info-grid { grid-template-columns: 1fr; } }
