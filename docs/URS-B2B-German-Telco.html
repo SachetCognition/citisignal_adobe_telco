@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URS: B2B Telco Storefront for German Market</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #212121; background: #fafafa; line-height: 1.6;
+  }
+  a { color: #1a237e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Layout ── */
+  .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── Title Page ── */
+  .title-page {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: #fff; padding: 4rem 2rem; text-align: center; margin-bottom: 3rem;
+    border-radius: 0 0 8px 8px;
+  }
+  .title-page h1 { font-size: 2.4rem; margin-bottom: .5rem; }
+  .title-page .subtitle { font-size: 1.2rem; opacity: .85; margin-bottom: 2rem; }
+  .title-page .meta-table { display: inline-block; text-align: left; }
+  .title-page .meta-table td { padding: .25rem .75rem; }
+  .title-page .meta-table td:first-child { font-weight: 600; opacity: .85; }
+
+  /* ── Section headings ── */
+  h2 {
+    color: #1a237e; font-size: 1.6rem; border-bottom: 3px solid #1a237e;
+    padding-bottom: .35rem; margin: 2.5rem 0 1rem;
+  }
+  h3 { color: #283593; font-size: 1.25rem; margin: 1.5rem 0 .75rem; }
+  h4 { color: #3949ab; font-size: 1.05rem; margin: 1rem 0 .5rem; }
+
+  /* ── Table of Contents ── */
+  .toc {
+    background: #e8eaf6; border-left: 4px solid #1a237e;
+    padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 4px;
+  }
+  .toc h2 { border: none; margin-top: 0; font-size: 1.3rem; }
+  .toc ol { padding-left: 1.5rem; }
+  .toc li { margin: .3rem 0; }
+  .toc ol ol { margin-top: .2rem; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem;
+    font-size: .92rem;
+  }
+  th, td { border: 1px solid #bdbdbd; padding: .6rem .75rem; text-align: left; }
+  th { background: #1a237e; color: #fff; font-weight: 600; }
+  tr:nth-child(even) { background: #f5f5f5; }
+
+  /* ── Requirement cards ── */
+  .req-card {
+    border: 1px solid #c5cae9; border-radius: 6px; padding: 1rem 1.25rem;
+    margin-bottom: 1rem; background: #fff;
+  }
+  .req-card .req-id { font-weight: 700; color: #1a237e; }
+  .req-card .req-title { font-weight: 600; margin-left: .5rem; }
+
+  /* ── Priority badges ── */
+  .badge {
+    display: inline-block; padding: .15rem .55rem; border-radius: 3px;
+    font-size: .78rem; font-weight: 700; color: #fff; vertical-align: middle;
+  }
+  .badge-p1 { background: #c62828; }
+  .badge-p2 { background: #ef6c00; }
+  .badge-p3 { background: #2e7d32; }
+
+  /* ── Status badges ── */
+  .status {
+    display: inline-block; padding: .15rem .55rem; border-radius: 3px;
+    font-size: .78rem; font-weight: 600;
+  }
+  .status-planned { background: #e0e0e0; color: #424242; }
+  .status-inprogress { background: #fff9c4; color: #f57f17; }
+  .status-done { background: #c8e6c9; color: #2e7d32; }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 3rem; padding-top: 1rem; border-top: 2px solid #1a237e;
+    font-size: .82rem; color: #757575; text-align: center;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    .title-page { background: #1a237e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .wrapper { max-width: none; padding: 0 1cm; }
+    h2 { page-break-after: avoid; }
+    .req-card, table { page-break-inside: avoid; }
+    a { color: #1a237e; }
+    .toc { background: #e8eaf6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .title-page h1 { font-size: 1.6rem; }
+    .wrapper { padding: 0 1rem 2rem; }
+    table { font-size: .82rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TITLE PAGE
+     ════════════════════════════════════════════════════════════════ -->
+<header class="title-page">
+  <h1>User Requirements Specification</h1>
+  <p class="subtitle">B2B Telco Storefront for German Market</p>
+  <table class="meta-table">
+    <tr><td>Document ID</td><td>URS-B2B-DE-TELCO-2026</td></tr>
+    <tr><td>Version</td><td>1.0</td></tr>
+    <tr><td>Date</td><td>19 May 2026</td></tr>
+    <tr><td>Status</td><td>Draft</td></tr>
+    <tr><td>Classification</td><td>Internal</td></tr>
+  </table>
+</header>
+
+<div class="wrapper">
+
+<!-- ════════════════════════════════════════════════════════════════
+     TABLE OF CONTENTS
+     ════════════════════════════════════════════════════════════════ -->
+<nav class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#executive-summary">Executive Summary</a></li>
+    <li><a href="#scope-objectives">Scope &amp; Objectives</a></li>
+    <li><a href="#definitions">Definitions &amp; Abbreviations</a></li>
+    <li><a href="#stakeholders">Stakeholders</a></li>
+    <li><a href="#fr-company-account">Company Account Management</a></li>
+    <li><a href="#fr-localization">German Localization (de_DE)</a></li>
+    <li><a href="#fr-catalog-pricing">B2B Catalog &amp; Pricing</a></li>
+    <li><a href="#fr-quotation">Quotation &amp; Negotiation</a></li>
+    <li><a href="#fr-requisition">Requisition Lists &amp; Reordering</a></li>
+    <li><a href="#fr-purchase-orders">Purchase Orders &amp; Approval Workflows</a></li>
+    <li><a href="#fr-checkout-payment">Checkout &amp; Payment (German B2B)</a></li>
+    <li><a href="#fr-telco-features">B2B Telco-Specific Features</a></li>
+    <li><a href="#fr-self-service">Self-Service Portal (Kundenportal)</a></li>
+    <li><a href="#nfr-performance">Non-Functional: Performance</a></li>
+    <li><a href="#nfr-security">Non-Functional: Security &amp; Compliance</a></li>
+    <li><a href="#nfr-accessibility">Non-Functional: Accessibility</a></li>
+    <li><a href="#nfr-integration">Non-Functional: Integration</a></li>
+    <li><a href="#technical-architecture">Technical Architecture Notes</a></li>
+  </ol>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════
+     1. EXECUTIVE SUMMARY
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="executive-summary">1. Executive Summary</h2>
+<p>
+  This User Requirements Specification (URS) defines the functional and non-functional requirements
+  for transforming the existing <strong>CitiSignal</strong> B2C storefront into a fully-featured
+  <strong>B2B Telco Storefront</strong> targeting <strong>German enterprise customers</strong>.
+</p>
+<p>
+  The current CitiSignal implementation is built on <strong>Adobe Edge Delivery Services (EDS)</strong>
+  with <strong>Adobe Commerce</strong> SaaS Drop-in components, using a block-based architecture
+  (see <code>blocks/</code> directory) and a three-phase loading pipeline
+  (<code>loadEager</code> / <code>loadLazy</code> / <code>loadDelayed</code> in
+  <code>scripts/scripts.js</code>). The transformation will extend this foundation with B2B
+  commerce capabilities including company accounts, shared catalogs, quote negotiation,
+  purchase-order approval workflows, and German-market localization&nbsp;(de_DE).
+</p>
+<p>
+  The target users are <strong>German Mittelstand and enterprise companies</strong> purchasing
+  corporate mobile contracts (Mobilfunkvertr&auml;ge), fixed-line packages, IoT SIM solutions,
+  and device-as-a-service offerings. The storefront will comply with German legal requirements
+  (DSGVO, Impressum, AGB) and support B2B payment methods prevalent in Germany (SEPA-Lastschrift,
+  Rechnung, Vorkasse).
+</p>
+
+<!-- ════════════════════════════════════════════════════════════════
+     2. SCOPE & OBJECTIVES
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="scope-objectives">2. Scope &amp; Objectives</h2>
+<h3>In Scope</h3>
+<ul>
+  <li>B2B company account management with German business identifiers (HRB, USt-IdNr)</li>
+  <li>Full German localization (de_DE) &mdash; UI, currency, tax, legal pages</li>
+  <li>Shared catalogs with customer-specific and tiered pricing</li>
+  <li>Quote request, negotiation, and quote-to-order workflows</li>
+  <li>Requisition lists and reordering capabilities</li>
+  <li>Multi-level purchase-order approval workflows</li>
+  <li>German B2B payment methods (SEPA, Rechnung, Vorkasse)</li>
+  <li>Telco-specific features: fleet SIM management, contract lifecycle, DaaS</li>
+  <li>Self-service Kundenportal with KPIs, user management, support tickets</li>
+  <li>DSGVO/GDPR compliance, WCAG 2.1 AA / BITV 2.0 accessibility</li>
+  <li>Integration touch-points for SAP ERP, CRM, and corporate SSO</li>
+</ul>
+<h3>Out of Scope</h3>
+<ul>
+  <li>B2C consumer-facing storefront modifications</li>
+  <li>Non-German market localizations (other than English fallback)</li>
+  <li>Physical retail / POS integration</li>
+  <li>Full SAP ERP implementation (only integration interface is defined)</li>
+  <li>Mobile native app development (responsive web only)</li>
+</ul>
+
+<!-- ════════════════════════════════════════════════════════════════
+     3. DEFINITIONS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="definitions">3. Definitions &amp; Abbreviations</h2>
+<table>
+  <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+  <tbody>
+    <tr><td>AGB</td><td>Allgemeine Gesch&auml;ftsbedingungen &mdash; General Terms and Conditions</td></tr>
+    <tr><td>BITV 2.0</td><td>Barrierefreie-Informationstechnik-Verordnung &mdash; German Accessibility Regulation</td></tr>
+    <tr><td>DaaS</td><td>Device-as-a-Service</td></tr>
+    <tr><td>DSGVO</td><td>Datenschutz-Grundverordnung &mdash; German implementation of GDPR</td></tr>
+    <tr><td>EDS</td><td>Edge Delivery Services (Adobe)</td></tr>
+    <tr><td>HRB</td><td>Handelsregisternummer &mdash; Commercial Register Number</td></tr>
+    <tr><td>K&uuml;ndigungsfrist</td><td>Cancellation notice period</td></tr>
+    <tr><td>MwSt</td><td>Mehrwertsteuer &mdash; Value Added Tax</td></tr>
+    <tr><td>PLZ</td><td>Postleitzahl &mdash; Postal Code</td></tr>
+    <tr><td>PO</td><td>Purchase Order</td></tr>
+    <tr><td>RFQ</td><td>Request for Quote (Angebotsanfrage)</td></tr>
+    <tr><td>SEPA</td><td>Single Euro Payments Area</td></tr>
+    <tr><td>SLA</td><td>Service Level Agreement</td></tr>
+    <tr><td>TTDSG</td><td>Telekommunikation-Telemedien-Datenschutz-Gesetz</td></tr>
+    <tr><td>USt-IdNr</td><td>Umsatzsteuer-Identifikationsnummer &mdash; VAT Identification Number</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════
+     4. STAKEHOLDERS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="stakeholders">4. Stakeholders</h2>
+<table>
+  <thead><tr><th>Role</th><th>Responsibility</th></tr></thead>
+  <tbody>
+    <tr><td>Product Owner</td><td>Requirements prioritization, acceptance criteria sign-off</td></tr>
+    <tr><td>B2B Commerce Architect</td><td>Adobe Commerce B2B module configuration, GraphQL API design</td></tr>
+    <tr><td>Frontend Lead</td><td>EDS block development, Drop-in customization</td></tr>
+    <tr><td>Localization Lead</td><td>de_DE translations, legal compliance review</td></tr>
+    <tr><td>QA Lead</td><td>Test strategy, Cypress E2E automation</td></tr>
+    <tr><td>Security / DPO</td><td>DSGVO compliance, data protection impact assessment</td></tr>
+    <tr><td>Integration Architect</td><td>SAP, CRM, SSO integration design</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════
+     5. COMPANY ACCOUNT MANAGEMENT
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-company-account">5. Company Account Management</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-001</span> <span class="req-title">Company Registration with German Business Identifiers</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support company registration requiring a <strong>Handelsregisternummer (HRB)</strong>
+    and <strong>USt-IdNr (VAT ID)</strong>. VAT IDs shall be validated in real-time via the
+    <strong>EU VIES</strong> service. Registration shall be rejected if VIES validation fails.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-002</span> <span class="req-title">Company Organizational Hierarchy</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support a multi-level organizational hierarchy within each company account:
+    <strong>Gesch&auml;ftsf&uuml;hrer</strong> (Managing Director),
+    <strong>Abteilungsleiter</strong> (Department Head),
+    <strong>Eink&auml;ufer</strong> (Buyer), and
+    <strong>Mitarbeiter</strong> (Employee). Parent-child relationships between organizational
+    units shall be configurable by the company admin.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-003</span> <span class="req-title">Role-Based Access Control</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall enforce role-based access control with the following roles:
+    <strong>Admin</strong> (full company management), <strong>Buyer</strong> (create orders and quotes),
+    <strong>Approver</strong> (approve/reject purchase orders), and <strong>Viewer</strong> (read-only catalog
+    and order history access). Permissions shall be configurable per role.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-004</span> <span class="req-title">Multiple Shipping/Billing Addresses (German Format)</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Each company account shall support multiple shipping and billing addresses using the German
+    address format: <strong>Stra&szlig;e</strong> (Street), <strong>PLZ</strong> (Postal Code),
+    <strong>Ort</strong> (City), <strong>Bundesland</strong> (Federal State). Addresses shall be
+    assignable to specific organizational units or cost centers.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-005</span> <span class="req-title">Company Credit Limit Management (Kreditlimit)</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support configurable credit limits (<strong>Kreditlimit</strong>) per company
+    account. Orders that would exceed the remaining credit balance shall be blocked at checkout with
+    an appropriate German-language error message. Credit limit status shall be visible on the
+    company dashboard.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     6. GERMAN LOCALIZATION (de_DE)
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-localization">6. German Localization (de_DE)</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-006</span> <span class="req-title">Full German Language UI</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>All UI elements shall be rendered in German, including block content, navigation, checkout flows,
+    error messages, form labels, and system notifications. The store view shall be configured as
+    <code>de_DE</code> via the <code>configs.js</code> environment detection system.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-007</span> <span class="req-title">EUR Currency with German Number Formatting</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>All monetary values shall be displayed in EUR using German number formatting:
+    <strong>1.234,56&nbsp;&euro;</strong> (period as thousands separator, comma as decimal separator,
+    Euro sign after the amount).</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-008</span> <span class="req-title">German Tax Display</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Product prices shall display both <strong>Brutto</strong> (gross) and <strong>Netto</strong>
+    (net) amounts. The standard VAT rate of <strong>19% MwSt</strong> and reduced rate of
+    <strong>7%</strong> shall be applied and shown. Invoices shall include a full tax breakdown.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-009</span> <span class="req-title">German-Compliant Legal Pages</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The storefront shall include the following legally required pages:
+    <strong>Impressum</strong> (Legal Notice),
+    <strong>AGB</strong> (Allgemeine Gesch&auml;ftsbedingungen / General Terms),
+    <strong>Datenschutzerkl&auml;rung</strong> (DSGVO/Privacy Policy), and
+    <strong>Widerrufsbelehrung</strong> (Cancellation Policy). All pages shall be accessible
+    from the footer navigation.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-010</span> <span class="req-title">German Date Format &amp; Phone Validation</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Dates shall be displayed in <strong>DD.MM.YYYY</strong> format throughout the application.
+    Phone number fields shall validate the German international format (<strong>+49</strong> prefix).</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     7. B2B CATALOG & PRICING
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-catalog-pricing">7. B2B Catalog &amp; Pricing</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-011</span> <span class="req-title">Shared Catalogs with Custom Pricing (Rahmenvertr&auml;ge)</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support shared catalogs per company with custom pricing tiers
+    (<strong>Rahmenvertr&auml;ge</strong> / framework agreements). Each company shall only see
+    products and prices assigned to their catalog.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-012</span> <span class="req-title">Volume / Tiered Pricing</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support volume-based and tiered pricing for corporate plans and bulk device
+    orders. Price tiers shall be clearly displayed on the product detail page (e.g., 1&ndash;9 units,
+    10&ndash;49, 50&ndash;99, 100+).</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-013</span> <span class="req-title">Corporate Telco Product Types</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The catalog shall support the following corporate telco product types:
+    <strong>Mobilfunkvertr&auml;ge</strong> (mobile contracts),
+    <strong>Festnetz</strong> (landline),
+    <strong>Internet</strong> packages,
+    <strong>IoT SIM</strong> packages, and
+    <strong>Fleet SIM management</strong> bundles.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-014</span> <span class="req-title">Product Comparison with SLA Tiers</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall provide a product comparison feature for enterprise plans with clearly
+    differentiated SLA tiers: <strong>Bronze</strong>, <strong>Silber</strong>,
+    <strong>Gold</strong>, and <strong>Platin</strong>.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-015</span> <span class="req-title">Quick Order / CSV Bulk Upload</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support a quick-order form and CSV bulk upload functionality for
+    multi-SIM provisioning. Uploaded CSVs shall be validated, and errors shall be reported
+    per line with German-language messages.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     8. QUOTATION & NEGOTIATION
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-quotation">8. Quotation &amp; Negotiation</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-016</span> <span class="req-title">Request for Quote (Angebotsanfrage) Workflow</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Buyers shall be able to submit a Request for Quote (RFQ / <strong>Angebotsanfrage</strong>)
+    from the cart. The RFQ shall capture requested quantities, desired pricing, and any
+    special terms.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-017</span> <span class="req-title">Negotiable Quotes with Multi-Round Negotiation</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support negotiable quotes with multi-round negotiation between buyer and
+    sales representative. Features include line-item discounts, overall quote discounts, comments
+    per round, and configurable expiration dates.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-018</span> <span class="req-title">Quote-to-Order Conversion</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Accepted quotes shall be convertible to orders with a single action. The order shall inherit
+    all negotiated prices and terms from the accepted quote.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-019</span> <span class="req-title">Quote PDF Generation in German</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall generate quote PDFs in German with company letterhead, all line items,
+    negotiated prices, terms &amp; conditions, and validity period.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     9. REQUISITION LISTS & REORDERING
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-requisition">9. Requisition Lists &amp; Reordering</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-020</span> <span class="req-title">Multiple Requisition Lists (Bestelllisten)</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Each user shall be able to create and manage multiple requisition lists
+    (<strong>Bestelllisten</strong>) for organizing frequently ordered products by department,
+    project, or purpose.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-021</span> <span class="req-title">Add-to-Requisition-List from PDP and PLP</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Users shall be able to add products to a requisition list directly from the Product Detail Page (PDP)
+    and Product Listing Page (PLP). A list selector shall appear when multiple lists exist.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-022</span> <span class="req-title">Requisition List to Cart Conversion</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Users shall be able to move all items (or selected items) from a requisition list to the
+    shopping cart in a single action.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-023</span> <span class="req-title">Reorder from Order History</span>
+    <span class="badge badge-p3">P3</span> <span class="status status-planned">Planned</span></p>
+  <p>Users shall be able to reorder all items from a previous order with a single click from the
+    order history view.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     10. PURCHASE ORDERS & APPROVAL WORKFLOWS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-purchase-orders">10. Purchase Orders &amp; Approval Workflows</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-024</span> <span class="req-title">Purchase Order (Bestellanforderung) Creation</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support purchase order creation with a mandatory <strong>PO number</strong>
+    field. PO numbers shall follow a configurable format per company.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-025</span> <span class="req-title">Multi-Level Approval Workflows</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall enforce multi-level approval workflows based on order value thresholds:</p>
+  <table>
+    <thead><tr><th>Order Value</th><th>Approval Required</th></tr></thead>
+    <tbody>
+      <tr><td>&lt; 500 &euro;</td><td>Auto-approved</td></tr>
+      <tr><td>500 &ndash; 5.000 &euro;</td><td>Abteilungsleiter (Department Head)</td></tr>
+      <tr><td>&gt; 5.000 &euro;</td><td>Gesch&auml;ftsf&uuml;hrer (Managing Director)</td></tr>
+    </tbody>
+  </table>
+  <p>Thresholds shall be configurable per company.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-026</span> <span class="req-title">Approval / Rejection with Comments</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Approvers shall be able to approve or reject purchase orders with mandatory comments on
+    rejection. The full approval history with timestamps shall be visible on the order detail page.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-027</span> <span class="req-title">Email Notifications for Pending Approvals</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall send email notifications in German to the designated approver when a purchase
+    order is pending approval. Reminder emails shall be sent after a configurable period.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     11. CHECKOUT & PAYMENT (GERMAN B2B)
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-checkout-payment">11. Checkout &amp; Payment (German B2B)</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-028</span> <span class="req-title">B2B Checkout with Company Address Pre-fill</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The B2B checkout shall pre-fill the company's default shipping and billing addresses.
+    Additional fields shall include <strong>PO number</strong> and <strong>cost center selection</strong>
+    (Kostenstelle).</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-029</span> <span class="req-title">German B2B Payment Methods</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support the following B2B payment methods:</p>
+  <ul>
+    <li><strong>SEPA-Lastschrift</strong> (Direct Debit) with IBAN validation (DE format: DE + 2 check digits + 18 digits)</li>
+    <li><strong>Rechnung</strong> (Invoice / Net 30 payment terms)</li>
+    <li><strong>Vorkasse</strong> (Prepayment / Bank Transfer)</li>
+  </ul>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-030</span> <span class="req-title">Split Billing per Cost Center</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support split billing, generating separate invoices per cost center or
+    department within a single order.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-031</span> <span class="req-title">Recurring Billing for Contract Services</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support recurring billing setup for contract-based services (e.g., monthly
+    mobile contract fees). Billing frequency and contract duration shall be configurable.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     12. B2B TELCO-SPECIFIC FEATURES
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-telco-features">12. B2B Telco-Specific Features</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-032</span> <span class="req-title">Corporate Fleet Management Dashboard</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall provide a fleet management dashboard displaying all active SIMs, their
+    associated contracts, assigned employees, current status (active/suspended/cancelled), and
+    aggregated usage data.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-033</span> <span class="req-title">Multi-Line / Multi-SIM Ordering with Employee Assignment</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Buyers shall be able to order multiple SIM cards in a single transaction and assign each
+    SIM to a specific employee. The assignment data shall be passed to the provisioning system.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-034</span> <span class="req-title">Contract Lifecycle Management</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall manage the full contract lifecycle including <strong>Vertragslaufzeit</strong>
+    (contract duration: 12/24/36 months), renewal options, and cancellation with
+    <strong>K&uuml;ndigungsfrist</strong> (notice period) tracking. Users shall receive alerts
+    before the cancellation deadline.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-035</span> <span class="req-title">Device-as-a-Service (DaaS)</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support Device-as-a-Service offerings with corporate leasing options.
+    Leasing terms (12/24/36 months), monthly rates, and end-of-lease options (return, purchase,
+    extend) shall be displayed on the product page.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-036</span> <span class="req-title">Bulk Provisioning API Integration</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall integrate with the network provisioning API to support bulk SIM activation,
+    number porting, and plan assignment for large orders.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-037</span> <span class="req-title">Usage Reporting Dashboard per Cost Center</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall provide usage reporting dashboards filterable by cost center
+    (<strong>Kostenstelle</strong>), showing data consumption, call minutes, SMS counts, and
+    associated costs per billing period.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     13. SELF-SERVICE PORTAL (KUNDENPORTAL)
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="fr-self-service">13. Self-Service Portal (Kundenportal)</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-038</span> <span class="req-title">Company Dashboard with KPIs</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The company dashboard shall display key performance indicators including: active lines count,
+    monthly spend (current and trend), contract overview (active, expiring soon, expired), and
+    recent order activity.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-039</span> <span class="req-title">User Management</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Company admins shall be able to add and remove employee users, assign roles, and manage
+    permissions. New users shall receive an activation email in German.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-040</span> <span class="req-title">Order History with Filtering &amp; Export</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The order history view shall support filtering by date range, status, cost center, and
+    order value. Export to <strong>CSV</strong> and <strong>PDF</strong> formats shall be available.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-041</span> <span class="req-title">Support Ticket Creation &amp; Tracking</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Users shall be able to create support tickets from the portal, categorize them (billing,
+    technical, contract), and track their resolution status.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-FR-042</span> <span class="req-title">Document Center</span>
+    <span class="badge badge-p3">P3</span> <span class="status status-planned">Planned</span></p>
+  <p>The portal shall provide a document center where users can download invoices, contracts,
+    SLA agreements, and other company documents in PDF format.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     14. NON-FUNCTIONAL: PERFORMANCE
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="nfr-performance">14. Non-Functional Requirements: Performance</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-001</span> <span class="req-title">Largest Contentful Paint (LCP)</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The storefront shall achieve an LCP of <strong>&lt;&nbsp;2.5&nbsp;seconds</strong> on
+    corporate network connections (50&nbsp;Mbps+). This aligns with the existing LCP block
+    prioritization in <code>scripts/scripts.js</code>.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-002</span> <span class="req-title">Concurrent B2B User Support</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support <strong>500+ concurrent B2B users</strong> per tenant without
+    performance degradation.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-003</span> <span class="req-title">Catalog Search Performance</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>Catalog search queries shall return results in <strong>&lt;&nbsp;200&nbsp;ms</strong> for
+    catalogs containing 50,000+ SKUs.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     15. NON-FUNCTIONAL: SECURITY & COMPLIANCE
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="nfr-security">15. Non-Functional Requirements: Security &amp; Compliance</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-004</span> <span class="req-title">DSGVO (GDPR) Compliance</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall be fully DSGVO-compliant, including: consent management platform integration,
+    data deletion request handling, and a cookie banner compliant with
+    <strong>&sect;&nbsp;25 TTDSG</strong>. No tracking shall occur before explicit consent.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-005</span> <span class="req-title">Role-Based Data Access</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>Users shall only be able to access data belonging to their own company. Cross-company data
+    leakage shall be prevented at the API layer.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-006</span> <span class="req-title">Audit Logging</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>All purchase, approval, and user management actions shall be logged with timestamp, user ID,
+    action type, and affected resources. Audit logs shall be retained for a minimum of 10&nbsp;years
+    per German commercial law (HGB &sect;&nbsp;257).</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-007</span> <span class="req-title">Transport &amp; Application Security</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall enforce <strong>TLS 1.3</strong>, implement Content Security Policy (CSP)
+    headers, and include XSS protection mechanisms.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     16. NON-FUNCTIONAL: ACCESSIBILITY
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="nfr-accessibility">16. Non-Functional Requirements: Accessibility</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-008</span> <span class="req-title">WCAG 2.1 AA Compliance</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>All storefront pages and components shall comply with <strong>WCAG 2.1 Level AA</strong>
+    guidelines.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-009</span> <span class="req-title">German Screen Reader Compatibility</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The storefront shall be tested for compatibility with German screen readers (JAWS, NVDA with
+    German language pack). All ARIA labels shall have German translations.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-010</span> <span class="req-title">BITV 2.0 Compliance</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The storefront shall comply with <strong>BITV 2.0</strong> (Barrierefreie-Informationstechnik-Verordnung),
+    the German federal regulation for accessible information technology.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     17. NON-FUNCTIONAL: INTEGRATION
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="nfr-integration">17. Non-Functional Requirements: Integration</h2>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-011</span> <span class="req-title">Adobe Commerce B2B Module Integration</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The storefront shall integrate with the <strong>Adobe Commerce B2B module</strong> for company
+    accounts, shared catalogs, quotes, requisition lists, and purchase orders. B2B GraphQL queries
+    shall follow the existing pattern in <code>commerce.js</code> using
+    <code>performCatalogServiceQuery</code> and <code>performMonolithGraphQLQuery</code>.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-012</span> <span class="req-title">ERP Integration (SAP)</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall provide integration interfaces for <strong>SAP ERP</strong> for order
+    and invoice synchronization. Order data shall be transmitted to SAP upon order placement,
+    and invoice data shall be retrieved for display in the document center.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-013</span> <span class="req-title">CRM Integration</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall integrate with a CRM system for company and contact management, enabling
+    synchronized customer data and activity history.</p>
+</div>
+
+<div class="req-card">
+  <p><span class="req-id">URS-NFR-014</span> <span class="req-title">Corporate SSO (SAML 2.0 / OpenID Connect)</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p>The system shall support Single Sign-On via <strong>SAML 2.0</strong> and
+    <strong>OpenID Connect</strong> for corporate login, enabling employees to authenticate using
+    their company identity provider.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     18. TECHNICAL ARCHITECTURE NOTES
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="technical-architecture">18. Technical Architecture Notes</h2>
+
+<h3>Existing Architecture Foundation</h3>
+<p>The current CitiSignal storefront is built on Adobe Edge Delivery Services with the following
+   key architectural patterns that B2B extensions must follow:</p>
+
+<h4>Three-Phase Loading Pipeline</h4>
+<p>Defined in <code>scripts/scripts.js</code>, the loading pipeline consists of:</p>
+<ul>
+  <li><strong><code>loadEager(doc)</code></strong> &mdash; Critical-path initialization: language setting, Drop-in initialization, LCP block loading, experimentation plugin eager phase.</li>
+  <li><strong><code>loadLazy(doc)</code></strong> &mdash; Deferred loading: autolinking modals, loading remaining blocks, footer, CSS, experimentation lazy phase, commerce events SDK.</li>
+  <li><strong><code>loadDelayed()</code></strong> &mdash; Non-critical resources loaded after a 3-second delay via <code>delayed.js</code>.</li>
+</ul>
+<p>New B2B components must integrate into the appropriate phase. B2B-critical blocks (e.g., company
+   account, checkout) should be added to the <code>LCP_BLOCKS</code> array when they are above the fold.</p>
+
+<h4>Block-Based Architecture</h4>
+<p>UI components reside in the <code>blocks/</code> directory. Each block is a self-contained module
+   with its own JS and CSS. Existing commerce blocks include:</p>
+<ul>
+  <li><code>commerce-cart</code>, <code>commerce-checkout</code>, <code>commerce-account</code></li>
+  <li><code>commerce-login</code>, <code>commerce-create-account</code></li>
+  <li><code>product-details</code>, <code>product-details-custom</code>, <code>product-details-plan</code></li>
+  <li><code>product-list-page</code>, <code>product-list-page-custom</code></li>
+</ul>
+<p>New B2B blocks (e.g., <code>b2b-company-dashboard</code>, <code>b2b-quote-negotiation</code>,
+   <code>b2b-fleet-management</code>) shall follow the same pattern.</p>
+
+<h4>Drop-in Component System</h4>
+<p>The <code>head.html</code> import map defines module aliases for Drop-in components:</p>
+<ul>
+  <li><code>@dropins/storefront-cart</code>, <code>@dropins/storefront-checkout</code></li>
+  <li><code>@dropins/storefront-pdp</code>, <code>@dropins/storefront-auth</code></li>
+  <li><code>@dropins/storefront-order-confirmation</code></li>
+</ul>
+<p>B2B Drop-ins (e.g., <code>@dropins/storefront-b2b-quotes</code>,
+   <code>@dropins/storefront-b2b-requisition</code>) shall be added to the import map and
+   initialized via the same <code>dropins.js</code> initialization system.</p>
+
+<h4>Environment Configuration</h4>
+<p>The <code>configs.js</code> module provides environment detection (dev/stage/prod) based on the
+   URL pattern. The <code>de_DE</code> store view configuration shall be added to the
+   <code>configs.xlsx</code> sheet and accessed via <code>getConfigValue()</code>.</p>
+
+<h4>GraphQL API Layer</h4>
+<p>The <code>commerce.js</code> module defines the GraphQL communication layer with two query
+   execution paths:</p>
+<ul>
+  <li><strong><code>performCatalogServiceQuery</code></strong> &mdash; High-performance Catalog Service API for product data (used by PLP/PDP).</li>
+  <li><strong><code>performMonolithGraphQLQuery</code></strong> &mdash; Standard Adobe Commerce GraphQL API for transactional operations (cart, checkout, account).</li>
+</ul>
+<p>B2B GraphQL queries (company management, quotes, requisition lists, purchase orders) shall be
+   added following this same pattern, targeting the Monolith GraphQL endpoint for B2B module
+   operations.</p>
+
+<!-- ── FOOTER ── -->
+<footer class="doc-footer">
+  <p>Document ID: URS-B2B-DE-TELCO-2026 | Version 1.0 | 19 May 2026 | Classification: Internal</p>
+  <p>CitiSignal &mdash; B2B Telco Storefront for German Market</p>
+</footer>
+
+</div><!-- /.wrapper -->
+</body>
+</html>

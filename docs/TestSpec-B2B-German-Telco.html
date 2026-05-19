@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Specification: B2B Telco Storefront for German Market</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #212121; background: #fafafa; line-height: 1.6;
+  }
+  a { color: #1a237e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Layout ── */
+  .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── Title Page ── */
+  .title-page {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: #fff; padding: 4rem 2rem; text-align: center; margin-bottom: 3rem;
+    border-radius: 0 0 8px 8px;
+  }
+  .title-page h1 { font-size: 2.4rem; margin-bottom: .5rem; }
+  .title-page .subtitle { font-size: 1.2rem; opacity: .85; margin-bottom: 2rem; }
+  .title-page .meta-table { display: inline-block; text-align: left; }
+  .title-page .meta-table td { padding: .25rem .75rem; }
+  .title-page .meta-table td:first-child { font-weight: 600; opacity: .85; }
+
+  /* ── Section headings ── */
+  h2 {
+    color: #1a237e; font-size: 1.6rem; border-bottom: 3px solid #1a237e;
+    padding-bottom: .35rem; margin: 2.5rem 0 1rem;
+  }
+  h3 { color: #283593; font-size: 1.25rem; margin: 1.5rem 0 .75rem; }
+  h4 { color: #3949ab; font-size: 1.05rem; margin: 1rem 0 .5rem; }
+
+  /* ── Table of Contents ── */
+  .toc {
+    background: #e8eaf6; border-left: 4px solid #1a237e;
+    padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 4px;
+  }
+  .toc h2 { border: none; margin-top: 0; font-size: 1.3rem; }
+  .toc ol { padding-left: 1.5rem; }
+  .toc li { margin: .3rem 0; }
+  .toc ol ol { margin-top: .2rem; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem;
+    font-size: .92rem;
+  }
+  th, td { border: 1px solid #bdbdbd; padding: .6rem .75rem; text-align: left; vertical-align: top; }
+  th { background: #1a237e; color: #fff; font-weight: 600; }
+  tr:nth-child(even) { background: #f5f5f5; }
+
+  /* ── Test-case cards ── */
+  .tc-card {
+    border: 1px solid #c5cae9; border-radius: 6px; padding: 1rem 1.25rem;
+    margin-bottom: 1rem; background: #fff;
+  }
+  .tc-card .tc-id { font-weight: 700; color: #1a237e; }
+  .tc-card .tc-title { font-weight: 600; margin-left: .5rem; }
+  .tc-card .tc-meta { font-size: .88rem; color: #616161; margin-top: .35rem; }
+  .tc-card .tc-meta strong { color: #212121; }
+  .tc-card ol, .tc-card ul { margin: .5rem 0 .5rem 1.5rem; }
+
+  /* ── Priority badges ── */
+  .badge {
+    display: inline-block; padding: .15rem .55rem; border-radius: 3px;
+    font-size: .78rem; font-weight: 700; color: #fff; vertical-align: middle;
+  }
+  .badge-p1 { background: #c62828; }
+  .badge-p2 { background: #ef6c00; }
+  .badge-p3 { background: #2e7d32; }
+
+  /* ── Status badges ── */
+  .status {
+    display: inline-block; padding: .15rem .55rem; border-radius: 3px;
+    font-size: .78rem; font-weight: 600;
+  }
+  .status-planned { background: #e0e0e0; color: #424242; }
+  .status-inprogress { background: #fff9c4; color: #f57f17; }
+  .status-done { background: #c8e6c9; color: #2e7d32; }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 3rem; padding-top: 1rem; border-top: 2px solid #1a237e;
+    font-size: .82rem; color: #757575; text-align: center;
+  }
+
+  /* ── Traceability matrix ── */
+  .trace-table td:first-child, .trace-table td:nth-child(2) { white-space: nowrap; }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    .title-page { background: #1a237e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .wrapper { max-width: none; padding: 0 1cm; }
+    h2 { page-break-after: avoid; }
+    .tc-card, table { page-break-inside: avoid; }
+    a { color: #1a237e; }
+    .toc { background: #e8eaf6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .title-page h1 { font-size: 1.6rem; }
+    .wrapper { padding: 0 1rem 2rem; }
+    table { font-size: .82rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TITLE PAGE
+     ════════════════════════════════════════════════════════════════ -->
+<header class="title-page">
+  <h1>Test Specification</h1>
+  <p class="subtitle">B2B Telco Storefront for German Market</p>
+  <table class="meta-table">
+    <tr><td>Document ID</td><td>TS-B2B-DE-TELCO-2026</td></tr>
+    <tr><td>Version</td><td>1.0</td></tr>
+    <tr><td>Date</td><td>19 May 2026</td></tr>
+    <tr><td>Status</td><td>Draft</td></tr>
+    <tr><td>Related URS</td><td>URS-B2B-DE-TELCO-2026 v1.0</td></tr>
+    <tr><td>Classification</td><td>Internal</td></tr>
+  </table>
+</header>
+
+<div class="wrapper">
+
+<!-- ════════════════════════════════════════════════════════════════
+     TABLE OF CONTENTS
+     ════════════════════════════════════════════════════════════════ -->
+<nav class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#test-strategy">Test Strategy</a></li>
+    <li><a href="#test-environment">Test Environment</a></li>
+    <li><a href="#test-data">Test Data Requirements</a></li>
+    <li><a href="#tc-company-account">Company Account Tests (TC-CA-xxx)</a></li>
+    <li><a href="#tc-localization">Localization Tests (TC-L10N-xxx)</a></li>
+    <li><a href="#tc-shared-catalog">Shared Catalog &amp; Pricing Tests (TC-SC-xxx)</a></li>
+    <li><a href="#tc-quotes">Quote Tests (TC-Q-xxx)</a></li>
+    <li><a href="#tc-requisition">Requisition List Tests (TC-RL-xxx)</a></li>
+    <li><a href="#tc-purchase-orders">Purchase Order &amp; Approval Tests (TC-PO-xxx)</a></li>
+    <li><a href="#tc-checkout">Checkout &amp; Payment Tests (TC-CK-xxx)</a></li>
+    <li><a href="#tc-telco">B2B Telco Feature Tests (TC-TF-xxx)</a></li>
+    <li><a href="#tc-self-service">Self-Service Portal Tests (TC-SP-xxx)</a></li>
+    <li><a href="#tc-nonfunctional">Non-Functional Tests</a></li>
+    <li><a href="#tc-regression">Regression Tests</a></li>
+    <li><a href="#traceability-matrix">Traceability Matrix</a></li>
+  </ol>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════
+     1. INTRODUCTION
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="introduction">1. Introduction</h2>
+<p>
+  This Test Specification defines the test cases for validating the B2B Telco Storefront for the
+  German market, as specified in the User Requirements Specification
+  (<strong>URS-B2B-DE-TELCO-2026</strong>). Each test case is mapped to one or more URS requirements
+  to ensure full traceability and coverage.
+</p>
+
+<!-- ════════════════════════════════════════════════════════════════
+     2. TEST STRATEGY
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="test-strategy">2. Test Strategy</h2>
+
+<table>
+  <thead><tr><th>Test Level</th><th>Tool / Framework</th><th>Scope</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Unit Testing</strong></td>
+      <td>Jest / Mocha</td>
+      <td>Individual block logic, utility functions, GraphQL query builders, validation helpers (IBAN, VAT ID, PLZ)</td>
+    </tr>
+    <tr>
+      <td><strong>Integration Testing</strong></td>
+      <td>Cypress Component Testing</td>
+      <td>Block interactions, Drop-in component integration, API response handling, event-bus communication</td>
+    </tr>
+    <tr>
+      <td><strong>E2E Testing</strong></td>
+      <td>Cypress (existing setup in <code>cypress/</code>)</td>
+      <td>Full user journeys: registration, catalog browsing, quote workflow, checkout, approval flows</td>
+    </tr>
+    <tr>
+      <td><strong>Accessibility Testing</strong></td>
+      <td>axe-core, Lighthouse, Pa11y</td>
+      <td>WCAG 2.1 AA compliance, BITV 2.0, keyboard navigation, screen reader compatibility</td>
+    </tr>
+    <tr>
+      <td><strong>Performance Testing</strong></td>
+      <td>Lighthouse CI, WebPageTest, k6</td>
+      <td>LCP targets, concurrent user load, catalog search latency</td>
+    </tr>
+    <tr>
+      <td><strong>Security Testing</strong></td>
+      <td>OWASP ZAP, manual review</td>
+      <td>DSGVO compliance, RBAC enforcement, CSP headers, XSS prevention, data isolation</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════
+     3. TEST ENVIRONMENT
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="test-environment">3. Test Environment</h2>
+<h3>Existing Cypress Setup</h3>
+<p>The project includes a Cypress test suite at <code>cypress/</code> with the following structure:</p>
+<ul>
+  <li><code>cypress/cypress.config.js</code> &mdash; Cypress configuration</li>
+  <li><code>cypress/src/tests/e2eTests/</code> &mdash; E2E test specifications</li>
+  <li><code>cypress/reporter-config.json</code> &mdash; Test reporter configuration</li>
+  <li>Existing tests: <code>verifyGuestUserCheckout.spec.js</code>, <code>verifyAuthUserCheckout.spec.js</code></li>
+</ul>
+
+<h3>Environment Configuration</h3>
+<table>
+  <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Base URL (Stage)</td><td><code>https://main--citisignal--adobedevxsc.hlx.page/</code></td></tr>
+    <tr><td>Base URL (Dev)</td><td><code>http://localhost:3000</code></td></tr>
+    <tr><td>Store View</td><td><code>de_DE</code> (B2B German)</td></tr>
+    <tr><td>Commerce Backend</td><td>Adobe Commerce with B2B module enabled</td></tr>
+    <tr><td>Browser Matrix</td><td>Chrome (latest), Firefox (latest), Edge (latest)</td></tr>
+    <tr><td>Viewport</td><td>1920&times;1080 (desktop), 768&times;1024 (tablet), 375&times;812 (mobile)</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════
+     4. TEST DATA REQUIREMENTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="test-data">4. Test Data Requirements</h2>
+<table>
+  <thead><tr><th>Data Set</th><th>Details</th></tr></thead>
+  <tbody>
+    <tr><td>Company A (Firma Alpha GmbH)</td><td>HRB 12345, USt-IdNr DE123456789, Credit limit 50.000 &euro;, Catalog A</td></tr>
+    <tr><td>Company B (Beta AG)</td><td>HRB 67890, USt-IdNr DE987654321, Credit limit 100.000 &euro;, Catalog B</td></tr>
+    <tr><td>Users per company</td><td>Admin, Buyer, Approver (Abteilungsleiter), Approver (Gesch&auml;ftsf&uuml;hrer), Viewer</td></tr>
+    <tr><td>Products</td><td>Mobile contracts (Mobilfunkvertr&auml;ge), IoT SIM packages, devices (iPhone, Samsung Galaxy), landline packages</td></tr>
+    <tr><td>Addresses</td><td>German format: Musterstra&szlig;e 1, 10115 Berlin, Berlin / Hauptstra&szlig;e 42, 80331 M&uuml;nchen, Bayern</td></tr>
+    <tr><td>Payment data</td><td>SEPA IBAN: DE89370400440532013000 (valid), DE00000000000000000000 (invalid)</td></tr>
+    <tr><td>SIM inventory</td><td>100+ test SIM records with various statuses (active, suspended, cancelled)</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════
+     5. COMPANY ACCOUNT TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-company-account">5. Company Account Tests (TC-CA-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CA-001</span> <span class="tc-title">Company Registration &mdash; Valid HRB &amp; USt-IdNr</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-001</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> VIES service available; no existing company with same HRB</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to company registration page</li>
+    <li>Enter valid company name, HRB number (e.g., HRB 12345), and USt-IdNr (e.g., DE123456789)</li>
+    <li>Fill in all required fields (address, admin contact)</li>
+    <li>Submit registration form</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Registration succeeds. VIES validation passes. Company account is created with status &ldquo;Pending Approval&rdquo; or &ldquo;Active&rdquo;. Admin user receives confirmation email in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CA-002</span> <span class="tc-title">Company Registration &mdash; Invalid USt-IdNr</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-001</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> VIES service available</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to company registration page</li>
+    <li>Enter valid company name and HRB, but invalid USt-IdNr (e.g., DE000000000)</li>
+    <li>Submit registration form</li>
+  </ol>
+  <p><strong>Expected Result:</strong> VIES validation fails. Registration is rejected. German error message: &ldquo;Ung&uuml;ltige USt-IdNr. Bitte &uuml;berpr&uuml;fen Sie Ihre Eingabe.&rdquo;</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CA-003</span> <span class="tc-title">Organizational Hierarchy &mdash; 3 Levels</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-002</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company A is active with admin access</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as Company A admin</li>
+    <li>Navigate to organization management</li>
+    <li>Create hierarchy: Gesch&auml;ftsf&uuml;hrung &rarr; Abteilung IT &rarr; Team Entwicklung</li>
+    <li>Assign users to each level</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Three-level hierarchy is created and displayed correctly in the org tree. Users appear under their assigned organizational units.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CA-004</span> <span class="tc-title">Role Assignment &mdash; Buyer Permissions</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-003</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company A active; admin and buyer users exist</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Admin assigns &ldquo;Buyer&rdquo; role to user</li>
+    <li>Log in as Buyer user</li>
+    <li>Attempt to create an order &rarr; should succeed</li>
+    <li>Attempt to approve a purchase order &rarr; should be denied</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Buyer can browse catalog and create orders but cannot access approval workflows. Access denied message displayed in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CA-005</span> <span class="tc-title">German Address Management</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-004</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company A active with admin access</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to address management</li>
+    <li>Add new address: Musterstra&szlig;e 1, 10115, Berlin, Berlin</li>
+    <li>Save address</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Address saved with correct German format fields (Stra&szlig;e, PLZ, Ort, Bundesland). Address appears in address book and is selectable during checkout.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CA-006</span> <span class="tc-title">Credit Limit Enforcement</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-005</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company A with Kreditlimit of 50.000 &euro;; existing orders totaling 49.500 &euro;</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as Buyer for Company A</li>
+    <li>Add products worth 1.000 &euro; to cart (total would exceed limit)</li>
+    <li>Proceed to checkout</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Checkout is blocked. German error message: &ldquo;Kreditlimit &uuml;berschritten. Verf&uuml;gbarer Kreditrahmen: 500,00 &euro;.&rdquo;</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     6. LOCALIZATION TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-localization">6. Localization Tests (TC-L10N-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-001</span> <span class="tc-title">Full Page Render in de_DE</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-006</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Store view set to de_DE</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to homepage</li>
+    <li>Navigate to PLP, PDP, cart, and checkout pages</li>
+    <li>Inspect all visible text elements</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All UI elements (navigation, buttons, labels, headings, footer) rendered in German. No untranslated English strings.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-002</span> <span class="tc-title">Price Display &mdash; German Format</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-007</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Products with known prices in catalog</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to a product with price 1234.56 EUR</li>
+    <li>Inspect displayed price format</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Price displayed as &ldquo;1.234,56 &euro;&rdquo; (period thousands separator, comma decimal, Euro sign after amount).</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-003</span> <span class="tc-title">Tax Display &mdash; MwSt</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-008</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Products with 19% MwSt rate</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to product detail page</li>
+    <li>Check price display for tax information</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Price shows &ldquo;inkl. 19% MwSt&rdquo; annotation. Both Brutto and Netto amounts visible.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-004</span> <span class="tc-title">Checkout &mdash; German Field Labels</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-006</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Items in cart, de_DE store view</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Proceed to checkout</li>
+    <li>Inspect all form field labels</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Labels display in German: Vorname, Nachname, Stra&szlig;e, PLZ, Ort, E-Mail-Adresse, Telefonnummer.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-005</span> <span class="tc-title">Date Display &mdash; DD.MM.YYYY</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-010</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Existing orders with known dates</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to order history</li>
+    <li>Check date format for order dates</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All dates displayed in DD.MM.YYYY format (e.g., 19.05.2026).</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-006</span> <span class="tc-title">Legal Pages Accessibility</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-009</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Legal pages configured in CMS</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to footer</li>
+    <li>Click links for Impressum, AGB, Datenschutzerkl&auml;rung, Widerrufsbelehrung</li>
+    <li>Verify each page loads with German content</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All four legal pages are accessible from footer, contain appropriate German legal content, and render correctly.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-007</span> <span class="tc-title">Validation Error Messages in German</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-006</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> de_DE store view active</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Submit checkout form with empty required fields</li>
+    <li>Enter invalid email format</li>
+    <li>Enter invalid PLZ (e.g., &ldquo;ABCDE&rdquo;)</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All validation error messages displayed in German (e.g., &ldquo;Pflichtfeld&rdquo;, &ldquo;Ung&uuml;ltige E-Mail-Adresse&rdquo;, &ldquo;Ung&uuml;ltige Postleitzahl&rdquo;).</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-L10N-008</span> <span class="tc-title">Drop-in Components &mdash; German Translations</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-006</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Drop-in components loaded with de_DE locale</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Add item to cart &rarr; verify cart Drop-in displays German text</li>
+    <li>Proceed to checkout &rarr; verify checkout Drop-in displays German text</li>
+    <li>View product detail &rarr; verify PDP Drop-in displays German text</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All Drop-in components (Cart, Checkout, PDP) display fully translated German UI including buttons, labels, and messages.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     7. SHARED CATALOG & PRICING TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-shared-catalog">7. Shared Catalog &amp; Pricing Tests (TC-SC-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SC-001</span> <span class="tc-title">Company-Specific Catalog Visibility</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-011</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company A assigned Catalog A; Company B assigned Catalog B; catalogs have different products and prices</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as Company A user &rarr; browse catalog &rarr; note prices</li>
+    <li>Log out, log in as Company B user &rarr; browse catalog &rarr; note prices</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Company A sees Catalog A products/prices. Company B sees Catalog B products/prices. No cross-contamination of catalog data.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SC-002</span> <span class="tc-title">Volume / Tiered Pricing Display</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-012</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Product with tiered pricing: 1&ndash;9 units at 29,99 &euro;, 10&ndash;49 at 24,99 &euro;, 50&ndash;99 at 19,99 &euro;, 100+ at 14,99 &euro;</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Add 10 SIMs to cart &rarr; verify tier 2 price applied</li>
+    <li>Change quantity to 50 &rarr; verify tier 3 price applied</li>
+    <li>Change quantity to 100 &rarr; verify tier 4 price applied</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Price per unit updates automatically based on quantity tiers. Tier pricing table visible on PDP.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SC-003</span> <span class="tc-title">Corporate Plan Product Display</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-013</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Mobilfunkvertrag products in catalog with contract terms</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to Mobilfunkvertr&auml;ge category</li>
+    <li>Open a corporate mobile contract product</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Product displays contract duration (Vertragslaufzeit), monthly fee, included data/minutes, and SLA tier. Product type is clearly identified as a contract-based service.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SC-004</span> <span class="tc-title">Product Comparison &mdash; SLA Tiers</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-014</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Four enterprise plans with Bronze/Silber/Gold/Platin SLA tiers</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Select 2&ndash;4 enterprise plans for comparison</li>
+    <li>View comparison table</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Side-by-side comparison displays SLA tier differences including response time, uptime guarantee, support channels, and pricing per tier.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SC-005</span> <span class="tc-title">CSV Bulk Upload &mdash; 50 SIM Orders</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-015</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Valid CSV file with 50 SIM order rows (SKU, quantity, employee name)</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to Quick Order page</li>
+    <li>Upload CSV file with 50 SIM entries</li>
+    <li>Review parsed results</li>
+    <li>Add all to cart</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All 50 rows parsed correctly. Products validated against catalog. Items added to cart with correct quantities and assignments.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     8. QUOTE TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-quotes">8. Quote Tests (TC-Q-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-Q-001</span> <span class="tc-title">Submit RFQ for 100 SIMs</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-016</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Buyer user logged in; 100 SIM product in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Add 100 SIMs to cart</li>
+    <li>Click &ldquo;Angebot anfordern&rdquo; (Request Quote)</li>
+    <li>Add notes about desired volume discount</li>
+    <li>Submit RFQ</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Quote created with status &ldquo;Ausstehend&rdquo; (Pending). Quote contains all 100 SIM items. Confirmation message displayed in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-Q-002</span> <span class="tc-title">Sales Rep Counter-Offer</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-017</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Active quote TC-Q-001 exists</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Sales rep opens the quote in admin</li>
+    <li>Applies 10% line-item discount</li>
+    <li>Sends counter-offer to buyer</li>
+    <li>Buyer views updated quote</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Buyer sees updated quote with 10% discount applied. Negotiation history shows both rounds. Prices displayed in German format.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-Q-003</span> <span class="tc-title">Quote-to-Order Conversion</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-018</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Accepted quote with negotiated prices</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Buyer opens accepted quote</li>
+    <li>Clicks &ldquo;Bestellung aufgeben&rdquo; (Place Order)</li>
+    <li>Completes checkout</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order created with all negotiated prices preserved. Order confirmation references the original quote number.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-Q-004</span> <span class="tc-title">Quote PDF Download &mdash; German Format</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-019</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Active or accepted quote exists</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Open quote detail page</li>
+    <li>Click &ldquo;PDF herunterladen&rdquo; (Download PDF)</li>
+    <li>Open downloaded PDF</li>
+  </ol>
+  <p><strong>Expected Result:</strong> PDF contains company letterhead, all line items with German-formatted prices, terms, and validity period. All text in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-Q-005</span> <span class="tc-title">Quote Expiration</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-017</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Quote with past expiration date</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Open expired quote</li>
+    <li>Attempt to accept / convert to order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Quote displays &ldquo;Abgelaufen&rdquo; (Expired) status. Conversion to order is blocked with German message.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     9. REQUISITION LIST TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-requisition">9. Requisition List Tests (TC-RL-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-RL-001</span> <span class="tc-title">Create Requisition List</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-020</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Buyer user logged in</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to requisition lists (Bestelllisten)</li>
+    <li>Create new list named &ldquo;Abteilung IT Ger&auml;te&rdquo;</li>
+  </ol>
+  <p><strong>Expected Result:</strong> List &ldquo;Abteilung IT Ger&auml;te&rdquo; created and appears in the requisition lists overview.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-RL-002</span> <span class="tc-title">Add Product from PDP to Requisition List</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-021</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Requisition list &ldquo;Abteilung IT Ger&auml;te&rdquo; exists</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to a product detail page</li>
+    <li>Click &ldquo;Zur Bestellliste hinzuf&uuml;gen&rdquo; (Add to Requisition List)</li>
+    <li>Select &ldquo;Abteilung IT Ger&auml;te&rdquo; from list selector</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Product added to selected requisition list. Confirmation message in German. Product appears in list with correct quantity.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-RL-003</span> <span class="tc-title">Requisition List to Cart Conversion</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-022</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Requisition list with 5 items</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Open requisition list &ldquo;Abteilung IT Ger&auml;te&rdquo;</li>
+    <li>Click &ldquo;Alle in den Warenkorb&rdquo; (Add All to Cart)</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All 5 items added to cart with correct quantities. Cart total reflects current catalog prices.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-RL-004</span> <span class="tc-title">Reorder from Order History</span>
+    <span class="badge badge-p3">P3</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-023</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Previous order #12345 exists in history</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to order history</li>
+    <li>Find order #12345</li>
+    <li>Click &ldquo;Erneut bestellen&rdquo; (Reorder)</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All items from order #12345 added to cart at current catalog prices.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     10. PURCHASE ORDER & APPROVAL TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-purchase-orders">10. Purchase Order &amp; Approval Tests (TC-PO-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PO-001</span> <span class="tc-title">Create PO with PO Number</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-024</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Buyer user logged in with items in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Proceed to checkout</li>
+    <li>Enter PO number &ldquo;PO-2026-001&rdquo;</li>
+    <li>Complete checkout as purchase order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Purchase order created with PO number &ldquo;PO-2026-001&rdquo;. PO number visible in order confirmation and order history.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PO-002</span> <span class="tc-title">Auto-Approval &mdash; Order &lt; 500 &euro;</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-025</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Approval rules configured with 500 &euro; threshold</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Create purchase order for 400 &euro;</li>
+    <li>Submit order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order auto-approved immediately. Status changes to &ldquo;Genehmigt&rdquo; (Approved) without manual intervention.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PO-003</span> <span class="tc-title">Abteilungsleiter Approval Required &mdash; 2.000 &euro;</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-025</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Approval rules configured; Abteilungsleiter user exists</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Buyer creates purchase order for 2.000 &euro;</li>
+    <li>Order enters &ldquo;Genehmigung ausstehend&rdquo; (Pending Approval) status</li>
+    <li>Log in as Abteilungsleiter</li>
+    <li>Approve the order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order requires Abteilungsleiter approval. After approval, status changes to &ldquo;Genehmigt&rdquo;. Buyer notified via email.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PO-004</span> <span class="tc-title">Gesch&auml;ftsf&uuml;hrer Approval Required &mdash; 10.000 &euro;</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-025</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Approval rules configured; Gesch&auml;ftsf&uuml;hrer user exists</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Buyer creates purchase order for 10.000 &euro;</li>
+    <li>Verify Abteilungsleiter level is bypassed / escalated</li>
+    <li>Log in as Gesch&auml;ftsf&uuml;hrer</li>
+    <li>Approve the order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order requires Gesch&auml;ftsf&uuml;hrer-level approval. After approval, order proceeds to fulfillment.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PO-005</span> <span class="tc-title">Rejection with Comment</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-026</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Pending purchase order exists</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as approver</li>
+    <li>Open pending purchase order</li>
+    <li>Click &ldquo;Ablehnen&rdquo; (Reject)</li>
+    <li>Enter comment: &ldquo;Budget &uuml;berschritten&rdquo;</li>
+    <li>Submit rejection</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order status changes to &ldquo;Abgelehnt&rdquo; (Rejected). Rejection comment visible in order history. Buyer receives rejection email with comment.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PO-006</span> <span class="tc-title">Email Notification for Pending Approval</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-027</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Email service configured; approver has valid email</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Buyer submits purchase order requiring approval</li>
+    <li>Check approver&rsquo;s email inbox</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Approver receives German-language email with order summary, amount, and link to approve/reject.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     11. CHECKOUT & PAYMENT TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-checkout">11. Checkout &amp; Payment Tests (TC-CK-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CK-001</span> <span class="tc-title">B2B Checkout &mdash; Company Address Pre-fill</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-028</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> B2B user logged in with company default address set; items in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Proceed to checkout</li>
+    <li>Inspect shipping and billing address fields</li>
+    <li>Verify PO number field and cost center dropdown are visible</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Company default address pre-filled. PO number text field and Kostenstelle (cost center) selection dropdown visible.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CK-002</span> <span class="tc-title">SEPA Payment &mdash; Valid IBAN</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-029</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> SEPA payment method enabled; items in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Select SEPA-Lastschrift payment method</li>
+    <li>Enter valid IBAN: DE89370400440532013000</li>
+    <li>Enter account holder name</li>
+    <li>Place order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> IBAN validated successfully. Order placed. SEPA mandate confirmation displayed in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CK-003</span> <span class="tc-title">SEPA Payment &mdash; Invalid IBAN</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-029</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> SEPA payment method enabled</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Select SEPA-Lastschrift payment method</li>
+    <li>Enter invalid IBAN: DE00000000000000000000</li>
+    <li>Attempt to place order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Validation error: &ldquo;Ung&uuml;ltige IBAN&rdquo;. Order submission blocked.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CK-004</span> <span class="tc-title">Rechnung (Invoice) Payment</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-029</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company approved for invoice payment; items in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Select &ldquo;Rechnung&rdquo; (Invoice) payment method</li>
+    <li>Place order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order placed successfully. Invoice generated with Net 30 payment terms. Payment due date displayed on order confirmation.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CK-005</span> <span class="tc-title">Split Billing by Cost Center</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-030</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company with multiple cost centers; mixed items in cart assigned to different cost centers</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Assign cart items to different cost centers during checkout</li>
+    <li>Enable split billing option</li>
+    <li>Place order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Separate invoices generated per cost center. Each invoice shows only items for that Kostenstelle.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-CK-006</span> <span class="tc-title">Recurring Billing &mdash; 24-Month Contract</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-031</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Contract-based product (Mobilfunkvertrag) in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Add 24-month Mobilfunkvertrag to cart</li>
+    <li>Complete checkout</li>
+    <li>Verify subscription/recurring billing record created</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Subscription created with 24-month term. Monthly billing amount and schedule displayed. Next billing date shown in order confirmation.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     12. B2B TELCO FEATURE TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-telco">12. B2B Telco Feature Tests (TC-TF-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-TF-001</span> <span class="tc-title">Fleet Dashboard &mdash; Active SIMs</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-032</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company with 50 active SIM records in the system</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as company admin</li>
+    <li>Navigate to fleet management dashboard</li>
+    <li>Review SIM listing</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Dashboard displays all 50 active SIMs with status (Aktiv/Gesperrt/Gek&uuml;ndigt), assigned employee, contract type, and usage summary.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-TF-002</span> <span class="tc-title">Multi-SIM Order with Employee Assignment</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-033</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> SIM product available; employee list populated</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Add 20 SIMs to cart</li>
+    <li>Assign each SIM to a specific employee from the directory</li>
+    <li>Complete order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order created with 20 SIMs. Each SIM linked to assigned employee. Provisioning request includes employee assignment data.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-TF-003</span> <span class="tc-title">Contract K&uuml;ndigungsfrist Display</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-034</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Active contract with known end date and 3-month cancellation period</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to contract management</li>
+    <li>Open contract details</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Contract displays Vertragslaufzeit, end date, K&uuml;ndigungsfrist (3 months), and latest cancellation date. Alert shown if within the notice period.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-TF-004</span> <span class="tc-title">DaaS Order &mdash; 36-Month Lease</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-035</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> DaaS products (iPhones) available with leasing options</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to DaaS category</li>
+    <li>Select 10 iPhones with 36-month leasing option</li>
+    <li>Complete order</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order placed for 10 devices on 36-month lease. Monthly leasing rate displayed. End-of-lease options documented.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-TF-005</span> <span class="tc-title">Usage Report Export per Kostenstelle</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-037</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Usage data available for multiple cost centers</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to usage reports</li>
+    <li>Filter by Kostenstelle &ldquo;IT-Abteilung&rdquo;</li>
+    <li>Export as CSV</li>
+  </ol>
+  <p><strong>Expected Result:</strong> CSV downloaded containing usage data (data, calls, SMS, costs) filtered by the selected cost center. German number formatting in export.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     13. SELF-SERVICE PORTAL TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-self-service">13. Self-Service Portal Tests (TC-SP-xxx)</h2>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SP-001</span> <span class="tc-title">Dashboard KPI Display</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-038</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company with active lines, orders, and contracts</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as company admin</li>
+    <li>View company dashboard</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Dashboard displays KPIs: active lines count, monthly spend (current and trend), contract overview (active/expiring/expired), recent orders. All values in German format.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SP-002</span> <span class="tc-title">Add New Employee User</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-039</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Company admin logged in</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to user management (Benutzerverwaltung)</li>
+    <li>Click &ldquo;Neuen Benutzer anlegen&rdquo;</li>
+    <li>Enter employee details and assign Buyer role</li>
+    <li>Submit</li>
+  </ol>
+  <p><strong>Expected Result:</strong> New user created. Activation email sent to employee in German. User appears in user list with assigned role.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SP-003</span> <span class="tc-title">Order History Export as PDF</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-040</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Multiple orders in history</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to order history (Bestellverlauf)</li>
+    <li>Apply date filter</li>
+    <li>Click &ldquo;Als PDF exportieren&rdquo;</li>
+  </ol>
+  <p><strong>Expected Result:</strong> PDF downloaded with German-formatted order list including dates (DD.MM.YYYY), amounts (1.234,56 &euro;), and statuses in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SP-004</span> <span class="tc-title">Create Support Ticket</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-041</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> User logged in</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to support section</li>
+    <li>Click &ldquo;Neues Ticket erstellen&rdquo;</li>
+    <li>Select category &ldquo;Rechnungsanfrage&rdquo; (Billing Inquiry)</li>
+    <li>Enter description and submit</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Ticket created with auto-generated ticket number. Status &ldquo;Offen&rdquo; (Open). Confirmation message displayed in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SP-005</span> <span class="tc-title">Download Invoice from Document Center</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-FR-042</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Invoices available in document center</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to document center (Dokumentencenter)</li>
+    <li>Filter by document type &ldquo;Rechnungen&rdquo; (Invoices)</li>
+    <li>Click download on a specific invoice</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Invoice PDF downloaded. Contains German-formatted amounts, tax breakdown (Netto + 19% MwSt = Brutto), and company details.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     14. NON-FUNCTIONAL TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-nonfunctional">14. Non-Functional Tests</h2>
+
+<h3>Performance Tests</h3>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PERF-001</span> <span class="tc-title">Homepage LCP &lt; 2.5s</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-001</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Stage environment deployed; Lighthouse CI configured</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Run Lighthouse CI against homepage on a simulated corporate connection (50 Mbps)</li>
+    <li>Record LCP metric</li>
+  </ol>
+  <p><strong>Expected Result:</strong> LCP &lt; 2.5 seconds. FID &lt; 100ms. CLS &lt; 0.1.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PERF-002</span> <span class="tc-title">500 Concurrent Users</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-002</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> k6 load test scripts prepared; staging environment</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Execute k6 load test ramping to 500 concurrent virtual users</li>
+    <li>Simulate browse &rarr; search &rarr; add to cart &rarr; checkout flow</li>
+    <li>Measure response times and error rates</li>
+  </ol>
+  <p><strong>Expected Result:</strong> P95 response time &lt; 3s. Error rate &lt; 0.1%. No OOM or crash events.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-PERF-003</span> <span class="tc-title">Catalog Search &lt; 200ms</span>
+    <span class="badge badge-p2">P2</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-003</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Catalog with 50,000+ SKUs loaded</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Execute search queries for common terms (&ldquo;Mobilfunkvertrag&rdquo;, &ldquo;iPhone&rdquo;, &ldquo;IoT SIM&rdquo;)</li>
+    <li>Measure API response time for each query</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All search queries return results in &lt; 200ms (server-side).</p>
+</div>
+
+<h3>Security Tests</h3>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SEC-001</span> <span class="tc-title">DSGVO Cookie Consent</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-004</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Cookie consent banner configured</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Open storefront in private/incognito window</li>
+    <li>Before interacting with cookie banner, check for tracking cookies/scripts</li>
+    <li>Reject all optional cookies</li>
+    <li>Verify no tracking is active</li>
+  </ol>
+  <p><strong>Expected Result:</strong> No tracking cookies or analytics scripts loaded before consent. After rejection, only essential cookies present. Banner text in German.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SEC-002</span> <span class="tc-title">Cross-Company Data Isolation</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-005</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Users from Company A and Company B</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Log in as Company A user</li>
+    <li>Attempt to access Company B&rsquo;s orders via URL manipulation / API calls</li>
+    <li>Attempt to view Company B&rsquo;s catalog prices</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All attempts to access Company B data return 403 Forbidden or empty results. No data leakage.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-SEC-003</span> <span class="tc-title">Audit Trail for Purchase Actions</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-006</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Audit logging enabled</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Perform: create order, approve order, reject order, modify user role</li>
+    <li>Check audit log</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All actions logged with timestamp, user ID, action type, and affected resource. Logs immutable and exportable.</p>
+</div>
+
+<h3>Accessibility Tests</h3>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-A11Y-001</span> <span class="tc-title">Axe Scan &mdash; Zero Critical/Serious Violations</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-008</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> axe-core integrated in Cypress tests</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Run axe scan on: homepage, PLP, PDP, cart, checkout, account dashboard, fleet management</li>
+    <li>Review results</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Zero critical or serious accessibility violations on all scanned pages.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-A11Y-002</span> <span class="tc-title">Keyboard Navigation &mdash; Full Checkout</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-008</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> Items in cart</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Starting from cart, navigate entire checkout flow using only keyboard (Tab, Enter, Space)</li>
+    <li>Verify focus indicators visible at each step</li>
+    <li>Complete order placement</li>
+  </ol>
+  <p><strong>Expected Result:</strong> All interactive elements reachable via keyboard. Focus indicators clearly visible. Order successfully placed without mouse usage.</p>
+</div>
+
+<h3>Integration Tests</h3>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-INT-001</span> <span class="tc-title">SAP Order Sync</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-012</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> SAP integration configured and active</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Place order on storefront</li>
+    <li>Check SAP system for corresponding order within 60 seconds</li>
+  </ol>
+  <p><strong>Expected Result:</strong> Order appears in SAP within 60 seconds. Order data (items, prices, company, addresses) matches storefront order.</p>
+</div>
+
+<div class="tc-card">
+  <p><span class="tc-id">TC-INT-002</span> <span class="tc-title">Corporate SSO via SAML</span>
+    <span class="badge badge-p1">P1</span> <span class="status status-planned">Planned</span></p>
+  <p class="tc-meta"><strong>Maps to:</strong> URS-NFR-014</p>
+  <p class="tc-meta"><strong>Preconditions:</strong> SAML IdP configured for Company A</p>
+  <p><strong>Steps:</strong></p>
+  <ol>
+    <li>Navigate to login page</li>
+    <li>Click &ldquo;Mit Firmen-SSO anmelden&rdquo; (Login with Corporate SSO)</li>
+    <li>Authenticate via corporate IdP</li>
+    <li>Verify redirect back to storefront</li>
+  </ol>
+  <p><strong>Expected Result:</strong> User authenticated via SAML. Redirected to storefront with correct company context and assigned role. Session established.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     15. REGRESSION TESTS
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="tc-regression">15. Regression Tests</h2>
+
+<h3>Existing E2E Tests</h3>
+<p>The existing Cypress E2E test suite in <code>cypress/src/tests/e2eTests/</code> includes:</p>
+<ul>
+  <li><code>verifyGuestUserCheckout.spec.js</code> &mdash; Guest checkout flow validation</li>
+  <li><code>verifyAuthUserCheckout.spec.js</code> &mdash; Authenticated user checkout flow validation</li>
+</ul>
+
+<h3>Required Adaptations for B2B German Flows</h3>
+<table>
+  <thead><tr><th>Existing Test</th><th>Required Changes</th><th>Priority</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>verifyGuestUserCheckout.spec.js</code></td>
+      <td>
+        <ul>
+          <li>Adapt for German field labels and validation messages</li>
+          <li>Add German address format assertions (Stra&szlig;e, PLZ, Ort)</li>
+          <li>Verify EUR currency formatting (1.234,56 &euro;)</li>
+          <li>Note: Guest checkout may be disabled for B2B; test should verify redirect to login</li>
+        </ul>
+      </td>
+      <td><span class="badge badge-p1">P1</span></td>
+    </tr>
+    <tr>
+      <td><code>verifyAuthUserCheckout.spec.js</code></td>
+      <td>
+        <ul>
+          <li>Extend with B2B user roles (Buyer, Admin)</li>
+          <li>Add PO number field validation</li>
+          <li>Add cost center selection</li>
+          <li>Add German payment methods (SEPA, Rechnung)</li>
+          <li>Add approval workflow assertions for high-value orders</li>
+        </ul>
+      </td>
+      <td><span class="badge badge-p1">P1</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>New Regression Suites Required</h3>
+<table>
+  <thead><tr><th>Suite Name</th><th>Description</th><th>Priority</th></tr></thead>
+  <tbody>
+    <tr><td><code>verifyB2BCompanyRegistration.spec.js</code></td><td>Company registration with HRB/USt-IdNr validation</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td><code>verifyB2BQuoteWorkflow.spec.js</code></td><td>Full RFQ &rarr; negotiation &rarr; order conversion flow</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td><code>verifyB2BApprovalWorkflow.spec.js</code></td><td>Multi-level PO approval/rejection flows</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td><code>verifyGermanLocalization.spec.js</code></td><td>Comprehensive de_DE localization checks</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td><code>verifyB2BFleetManagement.spec.js</code></td><td>SIM fleet dashboard and multi-SIM ordering</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td><code>verifyB2BSEPAPayment.spec.js</code></td><td>SEPA-Lastschrift and Rechnung payment flows</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td><code>verifyDSGVOCompliance.spec.js</code></td><td>Cookie consent, data deletion, privacy checks</td><td><span class="badge badge-p1">P1</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════
+     16. TRACEABILITY MATRIX
+     ════════════════════════════════════════════════════════════════ -->
+<h2 id="traceability-matrix">16. Traceability Matrix</h2>
+<p>The following matrix maps every URS requirement to its corresponding test cases, ensuring complete coverage.</p>
+
+<h3>Functional Requirements</h3>
+<table class="trace-table">
+  <thead><tr><th>Requirement ID</th><th>Requirement Title</th><th>Test Case(s)</th><th>Priority</th></tr></thead>
+  <tbody>
+    <tr><td>URS-FR-001</td><td>Company Registration (HRB, USt-IdNr, VIES)</td><td>TC-CA-001, TC-CA-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-002</td><td>Company Organizational Hierarchy</td><td>TC-CA-003</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-003</td><td>Role-Based Access Control</td><td>TC-CA-004</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-004</td><td>German Address Format</td><td>TC-CA-005</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-005</td><td>Credit Limit (Kreditlimit)</td><td>TC-CA-006</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-006</td><td>Full German Language UI</td><td>TC-L10N-001, TC-L10N-004, TC-L10N-007, TC-L10N-008</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-007</td><td>EUR German Number Formatting</td><td>TC-L10N-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-008</td><td>German Tax Display (MwSt)</td><td>TC-L10N-003</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-009</td><td>German Legal Pages</td><td>TC-L10N-006</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-010</td><td>German Date Format &amp; Phone Validation</td><td>TC-L10N-005</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-011</td><td>Shared Catalogs (Rahmenvertr&auml;ge)</td><td>TC-SC-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-012</td><td>Volume / Tiered Pricing</td><td>TC-SC-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-013</td><td>Corporate Telco Product Types</td><td>TC-SC-003</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-014</td><td>Product Comparison (SLA Tiers)</td><td>TC-SC-004</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-015</td><td>Quick Order / CSV Bulk Upload</td><td>TC-SC-005</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-016</td><td>RFQ (Angebotsanfrage) Workflow</td><td>TC-Q-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-017</td><td>Negotiable Quotes</td><td>TC-Q-002, TC-Q-005</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-018</td><td>Quote-to-Order Conversion</td><td>TC-Q-003</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-019</td><td>Quote PDF (German)</td><td>TC-Q-004</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-020</td><td>Requisition Lists (Bestelllisten)</td><td>TC-RL-001</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-021</td><td>Add-to-Requisition from PDP/PLP</td><td>TC-RL-002</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-022</td><td>Requisition List to Cart</td><td>TC-RL-003</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-023</td><td>Reorder from History</td><td>TC-RL-004</td><td><span class="badge badge-p3">P3</span></td></tr>
+    <tr><td>URS-FR-024</td><td>PO Creation with PO Number</td><td>TC-PO-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-025</td><td>Multi-Level Approval Workflows</td><td>TC-PO-002, TC-PO-003, TC-PO-004</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-026</td><td>Approval / Rejection with Comments</td><td>TC-PO-005</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-027</td><td>Email Notifications (Approvals)</td><td>TC-PO-006</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-028</td><td>B2B Checkout Pre-fill</td><td>TC-CK-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-029</td><td>German B2B Payment Methods</td><td>TC-CK-002, TC-CK-003, TC-CK-004</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-030</td><td>Split Billing per Cost Center</td><td>TC-CK-005</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-031</td><td>Recurring Billing (Contracts)</td><td>TC-CK-006</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-032</td><td>Fleet Management Dashboard</td><td>TC-TF-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-033</td><td>Multi-SIM Ordering (Employee Assignment)</td><td>TC-TF-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-034</td><td>Contract Lifecycle (K&uuml;ndigungsfrist)</td><td>TC-TF-003</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-035</td><td>Device-as-a-Service (DaaS)</td><td>TC-TF-004</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-036</td><td>Bulk Provisioning API</td><td>&mdash; (API-level test; covered by integration test suite)</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-037</td><td>Usage Reporting per Cost Center</td><td>TC-TF-005</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-038</td><td>Company Dashboard KPIs</td><td>TC-SP-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-039</td><td>User Management</td><td>TC-SP-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-FR-040</td><td>Order History Export (CSV/PDF)</td><td>TC-SP-003</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-041</td><td>Support Ticket Management</td><td>TC-SP-004</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-FR-042</td><td>Document Center</td><td>TC-SP-005</td><td><span class="badge badge-p3">P3</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Non-Functional Requirements</h3>
+<table class="trace-table">
+  <thead><tr><th>Requirement ID</th><th>Requirement Title</th><th>Test Case(s)</th><th>Priority</th></tr></thead>
+  <tbody>
+    <tr><td>URS-NFR-001</td><td>LCP &lt; 2.5s</td><td>TC-PERF-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-002</td><td>500+ Concurrent Users</td><td>TC-PERF-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-003</td><td>Search &lt; 200ms</td><td>TC-PERF-003</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-NFR-004</td><td>DSGVO / GDPR Compliance</td><td>TC-SEC-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-005</td><td>Role-Based Data Access</td><td>TC-SEC-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-006</td><td>Audit Logging</td><td>TC-SEC-003</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-007</td><td>TLS 1.3, CSP, XSS</td><td>&mdash; (Infrastructure &amp; header scan; covered by security audit)</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-NFR-008</td><td>WCAG 2.1 AA</td><td>TC-A11Y-001, TC-A11Y-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-009</td><td>German Screen Reader</td><td>&mdash; (Manual testing with JAWS/NVDA; documented separately)</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-NFR-010</td><td>BITV 2.0</td><td>TC-A11Y-001 (partial; full BITV audit documented separately)</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-011</td><td>Adobe Commerce B2B Module</td><td>&mdash; (Covered implicitly by all B2B functional tests)</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-012</td><td>SAP ERP Integration</td><td>TC-INT-001</td><td><span class="badge badge-p1">P1</span></td></tr>
+    <tr><td>URS-NFR-013</td><td>CRM Integration</td><td>&mdash; (Integration test suite; documented separately)</td><td><span class="badge badge-p2">P2</span></td></tr>
+    <tr><td>URS-NFR-014</td><td>SSO (SAML 2.0 / OIDC)</td><td>TC-INT-002</td><td><span class="badge badge-p1">P1</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ── FOOTER ── -->
+<footer class="doc-footer">
+  <p>Document ID: TS-B2B-DE-TELCO-2026 | Version 1.0 | 19 May 2026 | Classification: Internal</p>
+  <p>CitiSignal &mdash; B2B Telco Storefront for German Market &mdash; Test Specification</p>
+</footer>
+
+</div><!-- /.wrapper -->
+</body>
+</html>
