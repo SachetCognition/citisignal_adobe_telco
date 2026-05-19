@@ -1,5 +1,5 @@
 import { quotes, products } from '../../scripts/b2b-mock-data.js';
-import { formatCurrency, formatDate, labels } from '../../scripts/german-locale.js';
+import { formatCurrency, formatDate, escapeHTML, labels } from '../../scripts/german-locale.js';
 
 function getStatusClass(status) {
   const map = { Ausstehend: 'pending', Verhandlung: 'negotiation', Angenommen: 'accepted', Abgelaufen: 'expired' };
@@ -114,7 +114,7 @@ export default async function decorate(block) {
     const prod = products.find((p) => p.sku === sku);
     const qty = block.querySelector('#rfqQty').value;
     const msgs = block.querySelector('#quoteMessages');
-    msgs.innerHTML = `<div class="msg-success">Angebotsanfrage Q-2026-005 für ${qty}× ${prod.name} erfolgreich übermittelt.</div>`;
+    msgs.innerHTML = `<div class="msg-success">Angebotsanfrage Q-2026-005 für ${escapeHTML(qty)}× ${escapeHTML(prod.name)} erfolgreich übermittelt.</div>`;
     block.querySelector('#newQuoteForm').classList.add('hidden');
   });
 

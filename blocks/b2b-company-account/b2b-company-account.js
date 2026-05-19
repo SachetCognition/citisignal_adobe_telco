@@ -1,5 +1,5 @@
 import { companies, users, orgHierarchy } from '../../scripts/b2b-mock-data.js';
-import { formatCurrency, labels } from '../../scripts/german-locale.js';
+import { formatCurrency, escapeHTML, labels } from '../../scripts/german-locale.js';
 import { validateUstIdNr, validateHRB, validatePLZ, validateRequired, validateVIES } from '../../scripts/validators.js';
 
 function renderOrgTree(node, depth = 0) {
@@ -288,7 +288,7 @@ export default async function decorate(block) {
       const n = block.querySelector('#new-nachname').value;
       const em = block.querySelector('#new-email').value;
       const role = block.querySelector('#new-role').value;
-      tbody.insertAdjacentHTML('beforeend', `<tr><td>${v}</td><td>${n}</td><td>${em}</td><td><span class="role-badge role-${role.toLowerCase()}">${labels.roles[role]}</span></td><td>—</td><td><button class="btn-sm btn-edit">${labels.actions.edit}</button></td></tr>`);
+      tbody.insertAdjacentHTML('beforeend', `<tr><td>${escapeHTML(v)}</td><td>${escapeHTML(n)}</td><td>${escapeHTML(em)}</td><td><span class="role-badge role-${escapeHTML(role.toLowerCase())}">${labels.roles[role]}</span></td><td>—</td><td><button class="btn-sm btn-edit">${labels.actions.edit}</button></td></tr>`);
       addUserForm.classList.add('hidden');
       e.target.reset();
     });

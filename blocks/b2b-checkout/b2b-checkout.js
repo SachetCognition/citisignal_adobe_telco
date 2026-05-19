@@ -1,5 +1,5 @@
 import { companies } from '../../scripts/b2b-mock-data.js';
-import { formatCurrency, formatTaxDisplay, labels } from '../../scripts/german-locale.js';
+import { formatCurrency, formatTaxDisplay, escapeHTML, labels } from '../../scripts/german-locale.js';
 import { validateIBAN, validateRequired } from '../../scripts/validators.js';
 
 export default async function decorate(block) {
@@ -153,7 +153,7 @@ export default async function decorate(block) {
     if (errors.length > 0) {
       msgs.innerHTML = `<div class="msg-error">${errors.join('<br>')}</div>`;
     } else {
-      const poNum = block.querySelector('#poNumber').value || 'Auto';
+      const poNum = escapeHTML(block.querySelector('#poNumber').value || 'Auto');
       msgs.innerHTML = `<div class="msg-success">
         <h4>Bestellung erfolgreich aufgegeben!</h4>
         <p>Bestellnummer: <strong>100005</strong></p>

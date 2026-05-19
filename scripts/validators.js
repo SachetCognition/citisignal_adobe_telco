@@ -86,8 +86,8 @@ export function validateCSVUpload(csvText) {
     const cols = lines[i].split(/[;,]/).map((c) => c.trim());
     const row = {};
     header.forEach((h, idx) => { row[h] = cols[idx] || ''; });
-    if (!row.sku) errors.push(`Zeile ${i + 1}: SKU fehlt.`);
-    if (!row.menge || Number.isNaN(Number(row.menge)) || Number(row.menge) < 1) errors.push(`Zeile ${i + 1}: Ungültige Menge.`);
+    if (!row.sku) { errors.push(`Zeile ${i + 1}: SKU fehlt.`); }
+    else if (!row.menge || Number.isNaN(Number(row.menge)) || Number(row.menge) < 1) { errors.push(`Zeile ${i + 1}: Ungültige Menge.`); }
     else rows.push({ ...row, menge: Number(row.menge), lineNumber: i + 1 });
   }
   return { valid: errors.length === 0, errors, rows };

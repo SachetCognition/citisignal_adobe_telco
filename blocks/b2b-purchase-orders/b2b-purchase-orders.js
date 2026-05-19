@@ -1,5 +1,5 @@
 import { purchaseOrders, products, companies } from '../../scripts/b2b-mock-data.js';
-import { formatCurrency, labels } from '../../scripts/german-locale.js';
+import { formatCurrency, escapeHTML, labels } from '../../scripts/german-locale.js';
 import { getApprovalLevel } from '../../scripts/validators.js';
 
 function getStatusClass(status) {
@@ -133,11 +133,11 @@ export default async function decorate(block) {
       // Attach approve/reject
       panel.querySelector('.btn-approve')?.addEventListener('click', () => {
         const comment = panel.querySelector('#approvalComment')?.value || '';
-        block.querySelector('#poMessages').innerHTML = `<div class="msg-success">Bestellanforderung ${po.poNumber} genehmigt.${comment ? ` Kommentar: ${comment}` : ''}</div>`;
+        block.querySelector('#poMessages').innerHTML = `<div class="msg-success">Bestellanforderung ${escapeHTML(po.poNumber)} genehmigt.${comment ? ` Kommentar: ${escapeHTML(comment)}` : ''}</div>`;
       });
       panel.querySelector('.btn-reject')?.addEventListener('click', () => {
         const comment = panel.querySelector('#approvalComment')?.value || '';
-        block.querySelector('#poMessages').innerHTML = `<div class="msg-error">Bestellanforderung ${po.poNumber} abgelehnt.${comment ? ` Kommentar: ${comment}` : ''}</div>`;
+        block.querySelector('#poMessages').innerHTML = `<div class="msg-error">Bestellanforderung ${escapeHTML(po.poNumber)} abgelehnt.${comment ? ` Kommentar: ${escapeHTML(comment)}` : ''}</div>`;
       });
     });
   });
