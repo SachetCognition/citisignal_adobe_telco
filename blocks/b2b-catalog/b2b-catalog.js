@@ -19,8 +19,8 @@ function renderProductCard(product) {
       ${product.dataGB ? `<p class="product-feature">${labels.product.dataVolume}: ${product.dataGB} GB</p>` : ''}
       ${product.contractMonths ? `<p class="product-feature">${labels.product.contractDuration}: ${product.contractMonths.join(' / ')} Monate</p>` : ''}
       <div class="product-pricing">
-        <div class="price-main">${tax.brutto}</div>
-        <div class="price-tax">${tax.netto} ${tax.label}</div>
+        <div class="price-main">${tax.brutto} ${tax.label}</div>
+        <div class="price-tax">${tax.netto} netto</div>
       </div>
       <div class="tier-pricing">
         <table class="tier-table">

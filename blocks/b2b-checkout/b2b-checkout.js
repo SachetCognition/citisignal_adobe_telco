@@ -69,7 +69,7 @@ export default async function decorate(block) {
                   <label>${labels.checkout.accountHolder}</label>
                   <input type="text" id="accountHolder" value="${company.name}">
                 </div>
-                <p class="sepa-mandate">Ich ermächtige ${company.name}, Zahlungen von meinem Konto mittels SEPA-Lastschrift einzuziehen.</p>
+                <p class="sepa-mandate">Ich ermächtige CitiSignal Telekommunikation GmbH, Zahlungen von meinem Konto mittels SEPA-Lastschrift einzuziehen.</p>
               </div>
               <label class="payment-option">
                 <input type="radio" name="payment" value="rechnung">
