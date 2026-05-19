@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B German Telco – Test Harness</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <style>
+    body { font-family: 'Segoe UI', 'open-sans', sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+    .test-nav { background: #1a237e; color: #fff; padding: 1rem 2rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .test-nav h1 { margin: 0; font-size: 1.2rem; margin-right: auto; }
+    .test-nav a { color: #fff; text-decoration: none; padding: .4rem .8rem; background: rgba(255,255,255,.15); border-radius: 4px; font-size: .85rem; }
+    .test-nav a:hover, .test-nav a.active { background: rgba(255,255,255,.3); }
+    .block-section { padding: 2rem; display: none; }
+    .block-section.active { display: block; }
+    .block-container { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.1); padding: 1.5rem; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body class="appear">
+  <nav class="test-nav">
+    <h1>CitiSignal B2B German Telco</h1>
+    <a href="#portal" class="nav-link active" data-section="portal">Kundenportal</a>
+    <a href="#company" class="nav-link" data-section="company">Firmenkonto</a>
+    <a href="#catalog" class="nav-link" data-section="catalog">Katalog</a>
+    <a href="#checkout" class="nav-link" data-section="checkout">Kasse</a>
+    <a href="#quotes" class="nav-link" data-section="quotes">Angebote</a>
+    <a href="#requisition" class="nav-link" data-section="requisition">Bestelllisten</a>
+    <a href="#purchase-orders" class="nav-link" data-section="purchase-orders">Bestellanforderungen</a>
+    <a href="#fleet" class="nav-link" data-section="fleet">Flottenmanagement</a>
+    <a href="#contracts" class="nav-link" data-section="contracts">Verträge</a>
+    <a href="#legal" class="nav-link" data-section="legal">Rechtliches</a>
+  </nav>
+
+  <section class="block-section active" id="section-portal">
+    <div class="block-container" id="block-portal"></div>
+  </section>
+  <section class="block-section" id="section-company">
+    <div class="block-container" id="block-company"></div>
+  </section>
+  <section class="block-section" id="section-catalog">
+    <div class="block-container" id="block-catalog"></div>
+  </section>
+  <section class="block-section" id="section-checkout">
+    <div class="block-container" id="block-checkout"></div>
+  </section>
+  <section class="block-section" id="section-quotes">
+    <div class="block-container" id="block-quotes"></div>
+  </section>
+  <section class="block-section" id="section-requisition">
+    <div class="block-container" id="block-requisition"></div>
+  </section>
+  <section class="block-section" id="section-purchase-orders">
+    <div class="block-container" id="block-purchase-orders"></div>
+  </section>
+  <section class="block-section" id="section-fleet">
+    <div class="block-container" id="block-fleet"></div>
+  </section>
+  <section class="block-section" id="section-contracts">
+    <div class="block-container" id="block-contracts"></div>
+  </section>
+  <section class="block-section" id="section-legal">
+    <div class="block-container" id="block-legal"></div>
+  </section>
+
+  <script type="module">
+    const blocks = {
+      portal: { path: '/blocks/b2b-portal/b2b-portal.js', css: '/blocks/b2b-portal/b2b-portal.css' },
+      company: { path: '/blocks/b2b-company-account/b2b-company-account.js', css: '/blocks/b2b-company-account/b2b-company-account.css' },
+      catalog: { path: '/blocks/b2b-catalog/b2b-catalog.js', css: '/blocks/b2b-catalog/b2b-catalog.css' },
+      checkout: { path: '/blocks/b2b-checkout/b2b-checkout.js', css: '/blocks/b2b-checkout/b2b-checkout.css' },
+      quotes: { path: '/blocks/b2b-quotes/b2b-quotes.js', css: '/blocks/b2b-quotes/b2b-quotes.css' },
+      requisition: { path: '/blocks/b2b-requisition/b2b-requisition.js', css: '/blocks/b2b-requisition/b2b-requisition.css' },
+      'purchase-orders': { path: '/blocks/b2b-purchase-orders/b2b-purchase-orders.js', css: '/blocks/b2b-purchase-orders/b2b-purchase-orders.css' },
+      fleet: { path: '/blocks/b2b-fleet-management/b2b-fleet-management.js', css: '/blocks/b2b-fleet-management/b2b-fleet-management.css' },
+      contracts: { path: '/blocks/b2b-contracts/b2b-contracts.js', css: '/blocks/b2b-contracts/b2b-contracts.css' },
+      legal: { path: '/blocks/b2b-legal/b2b-legal.js', css: '/blocks/b2b-legal/b2b-legal.css' },
+    };
+
+    const loaded = {};
+
+    async function loadBlock(name) {
+      if (loaded[name]) return;
+      const { path, css } = blocks[name];
+      // Load CSS
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = css;
+      document.head.appendChild(link);
+      // Load and decorate block
+      const mod = await import(path);
+      const container = document.getElementById(`block-${name}`);
+      await mod.default(container);
+      loaded[name] = true;
+    }
+
+    // Navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const section = link.dataset.section;
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.block-section').forEach(s => s.classList.remove('active'));
+        link.classList.add('active');
+        document.getElementById(`section-${section}`).classList.add('active');
+        await loadBlock(section);
+      });
+    });
+
+    // Load initial block
+    loadBlock('portal');
+  </script>
+</body>
+</html>
